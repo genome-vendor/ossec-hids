@@ -1,0 +1,7 @@
+bin/agent-auth var/ossec/bin
+bin/agent_control var/ossec/bin
+bin/ossec-agentd var/ossec/bin
+bin/ossec-execd var/ossec/bin
+bin/ossec-logcollector var/ossec/bin
+bin/ossec-syscheckd var/ossec/bin
+bin/manage_agents var/ossec/bin

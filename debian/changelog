@@ -1,0 +1,5 @@
+ossec-hids (2.7.1-1) lucid; urgency=low
+
+  * Build 2.7.1
+
+ -- Matthew Callaway <mcallawa@genome.wustl.edu>  Tue, 18 Mar 2014 14:30:36 +0000

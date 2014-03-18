@@ -1,0 +1,22 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+BASEDIR=./debian/ossec-hids-client/etc
+OSSEC_INIT=${BASEDIR}/ossec-init.conf
+
+%:
+	dh  $@
+
+override_dh_auto_build:
+	cd src && make all && make build
+
+override_dh_auto_install:
+	dh_install
+	install -d ${BASEDIR}
+	echo "DIRECTORY=\"/var/ossec\"" > ${OSSEC_INIT}
+	echo "VERSION=\"v2.7.1\"" >> ${OSSEC_INIT}
+	echo "DATE=\"`date`\"" >> ${OSSEC_INIT}
+	echo "TYPE=\"agent\"" >> ${OSSEC_INIT}

@@ -1,0 +1,3 @@
+/var/ossec/queue/alerts
+/var/ossec/queue/rids
+/var/ossec/queue/syscheck
