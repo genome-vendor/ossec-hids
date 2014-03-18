@@ -4,19 +4,22 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-BASEDIR=./debian/ossec-hids-client/etc
-OSSEC_INIT=${BASEDIR}/ossec-init.conf
-
 %:
 	dh  $@
 
 override_dh_auto_build:
 	cd src && make all && make build
+	mkdir -p tmp/client
+	mkdir -p tmp/server
+	echo "DIRECTORY=\"/var/ossec\"" > tmp/client/ossec-init.conf
+	echo "VERSION=\"v2.7.1\"" >> tmp/client/ossec-init.conf
+	echo "DATE=\"`date`\"" >> tmp/client/ossec-init.conf
+	echo "TYPE=\"agent\"" >> tmp/client/ossec-init.conf
+	echo "DIRECTORY=\"/var/ossec\"" > tmp/server/ossec-init.conf
+	echo "VERSION=\"v2.7.1\"" >> tmp/server/ossec-init.conf
+	echo "DATE=\"`date`\"" >> tmp/server/ossec-init.conf
+	echo "TYPE=\"server\"" >> tmp/server/ossec-init.conf
 
 override_dh_auto_install:
 	dh_install
-	install -d ${BASEDIR}
-	echo "DIRECTORY=\"/var/ossec\"" > ${OSSEC_INIT}
-	echo "VERSION=\"v2.7.1\"" >> ${OSSEC_INIT}
-	echo "DATE=\"`date`\"" >> ${OSSEC_INIT}
-	echo "TYPE=\"agent\"" >> ${OSSEC_INIT}
+	rm -rf tmp

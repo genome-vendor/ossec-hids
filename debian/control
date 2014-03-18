@@ -25,3 +25,13 @@ Description: Open Source Security, Host-Based Intrusion Detection System
  rootkit detection, real-time alerting and active response.
  This is the client version.
 
+Package: ossec-hids-server
+Architecture: any
+Pre-Depends: debconf (>= 0.2.17) | debconf-2.0
+Depends: libssl1.0.0 | libssl0.9.8
+Conflicts: ossec-hids-server, ossec-hids-local
+Description: Open Source Security, Host-Based Intrusion Detection System
+ It performs log analysis, integrity checking, Windows registry monitoring,
+ rootkit detection, real-time alerting and active response.
+ This is the server version.
+
