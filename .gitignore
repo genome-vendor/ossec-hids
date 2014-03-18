@@ -8,6 +8,14 @@ debian/*.debhelper
 debian/*.debhelper.log
 debian/*.substvars
 debian/files
+debian/ossec-hids-client/
+debian/ossec-hids-server/
+debian/ossec-hids/
+
+src/external/lua-5.2.3/src/ossec-lua
+src/external/lua-5.2.3/src/ossec-luac
+src/external/zlib-1.2.8/configure.log
+src/external/zlib-1.2.8/zlib.pc
 
 # Auto generated build files
 src/LOCATION
