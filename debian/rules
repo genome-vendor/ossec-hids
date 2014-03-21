@@ -8,18 +8,23 @@
 	dh  $@
 
 override_dh_auto_build:
+	echo 'DIR="/var/ossec"' > src/LOCATION
 	cd src && make all && make build
-	mkdir -p tmp/client
-	mkdir -p tmp/server
-	echo "DIRECTORY=\"/var/ossec\"" > tmp/client/ossec-init.conf
-	echo "VERSION=\"v2.7.1\"" >> tmp/client/ossec-init.conf
-	echo "DATE=\"`date`\"" >> tmp/client/ossec-init.conf
-	echo "TYPE=\"agent\"" >> tmp/client/ossec-init.conf
-	echo "DIRECTORY=\"/var/ossec\"" > tmp/server/ossec-init.conf
-	echo "VERSION=\"v2.7.1\"" >> tmp/server/ossec-init.conf
-	echo "DATE=\"`date`\"" >> tmp/server/ossec-init.conf
-	echo "TYPE=\"server\"" >> tmp/server/ossec-init.conf
 
 override_dh_auto_install:
 	dh_install
-
+	cp ./contrib/specs/agent/preloaded-vars.conf etc/
+	echo 'DIR="../debian/ossec-hids-client/var/ossec"' > src/LOCATION
+	cd src; ./InstallAgent.sh; cd -
+	echo 'DIR="../debian/ossec-hids-server/var/ossec"' > src/LOCATION
+	cd src; ./InstallServer.sh; cd -
+	mkdir -p debian/ossec-hids-client/etc
+	mkdir -p debian/ossec-hids-server/etc
+	echo "DIRECTORY=\"/var/ossec\"" > debian/ossec-hids-client/etc/ossec-init.conf
+	echo "VERSION=\"v2.7.1\"" >> debian/ossec-hids-client/etc/ossec-init.conf
+	echo "DATE=\"`date`\"" >> debian/ossec-hids-client/etc/ossec-init.conf
+	echo "TYPE=\"agent\"" >> debian/ossec-hids-client/etc/ossec-init.conf
+	echo "DIRECTORY=\"/var/ossec\"" > debian/ossec-hids-server/etc/ossec-init.conf
+	echo "VERSION=\"v2.7.1\"" >> debian/ossec-hids-server/etc/ossec-init.conf
+	echo "DATE=\"`date`\"" >> debian/ossec-hids-server/etc/ossec-init.conf
+	echo "TYPE=\"server\"" >> debian/ossec-hids-server/etc/ossec-init.conf
