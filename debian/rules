@@ -13,7 +13,6 @@ override_dh_auto_build:
 
 override_dh_auto_install:
 	dh_install
-	cp ./contrib/specs/agent/preloaded-vars.conf etc/
 	echo 'DIR="../debian/ossec-hids-client/var/ossec"' > src/LOCATION
 	cd src; ./InstallAgent.sh; cd -
 	echo 'DIR="../debian/ossec-hids-server/var/ossec"' > src/LOCATION
@@ -28,3 +27,5 @@ override_dh_auto_install:
 	echo "VERSION=\"v2.7.1\"" >> debian/ossec-hids-server/etc/ossec-init.conf
 	echo "DATE=\"`date`\"" >> debian/ossec-hids-server/etc/ossec-init.conf
 	echo "TYPE=\"server\"" >> debian/ossec-hids-server/etc/ossec-init.conf
+	# Clean up so the git repo isn't dirty
+	git checkout src/LOCATION
