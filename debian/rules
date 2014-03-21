@@ -22,4 +22,4 @@ override_dh_auto_build:
 
 override_dh_auto_install:
 	dh_install
-	rm -rf tmp
+
